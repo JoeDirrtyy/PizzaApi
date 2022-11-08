@@ -4,7 +4,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 public class Pizza {
@@ -19,7 +18,7 @@ public class Pizza {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
 
@@ -63,14 +62,4 @@ public class Pizza {
         this.customer = customer;
     }
 
-    @Override
-    public String toString() {
-        return "Pizza{" +
-                "id=" + id +
-                ", crust='" + crust + '\'' +
-                ", toppings=" + Arrays.toString(toppings) +
-                ", status='" + status + '\'' +
-                ", customer=" + customer +
-                '}';
-    }
 }

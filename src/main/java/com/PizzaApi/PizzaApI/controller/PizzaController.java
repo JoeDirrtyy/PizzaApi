@@ -23,7 +23,7 @@ public class PizzaController {
     private PizzaRepository pizzaRepository;
 
     @PostMapping("/pizzas/{customerId}/pizzas")
-    public Optional<Pizza> createPizza(@PathVariable(value = "categoryId") Long customerId, @RequestBody Pizza pizza){
+    public Optional<Pizza> createPizza(@PathVariable(value = "customerId") Long customerId, @RequestBody Pizza pizza){
         return pizzaService.createPizza(customerId,pizza);
     }
 
