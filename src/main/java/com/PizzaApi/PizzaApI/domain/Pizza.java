@@ -1,14 +1,18 @@
 package com.PizzaApi.PizzaApI.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 public class Pizza {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
 
     private String crust;
@@ -17,10 +21,10 @@ public class Pizza {
 
     private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
+
 
     public Long getId() {
         return id;
@@ -62,4 +66,14 @@ public class Pizza {
         this.customer = customer;
     }
 
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "id=" + id +
+                ", crust='" + crust + '\'' +
+                ", toppings=" + Arrays.toString(toppings) +
+                ", status='" + status + '\'' +
+                ", customer=" + customer +
+                '}';
+    }
 }
